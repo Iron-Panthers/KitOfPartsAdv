@@ -2,6 +2,7 @@ package org.usfirst.frc.team5026.robot.subsystems;
 
 import org.usfirst.frc.team5026.robot.Hardware;
 import org.usfirst.frc.team5026.robot.Robot;
+import org.usfirst.frc.team5026.robot.commands.DriveRobotWithJoystick;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,8 +19,7 @@ public class Drive extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand() {
-		hardware.leftDriveMotors.set(0);
-		hardware.rightDriveMotors.set(0);
+		setDefaultCommand(new DriveRobotWithJoystick());
 	}
 	
 	public void setMotors(int speed) {
@@ -32,8 +32,7 @@ public class Drive extends Subsystem {
 	}
 	
 	public void stopMotors() {
-		hardware.leftDriveMotors.set(0);
-		hardware.rightDriveMotors.set(0);
+		this.setMotors(0);
 	}
 
 }

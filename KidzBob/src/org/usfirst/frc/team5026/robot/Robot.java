@@ -1,14 +1,15 @@
 
 package org.usfirst.frc.team5026.robot;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team5026.robot.commands.ExampleCommand;
+import org.usfirst.frc.team5026.robot.subsystems.Drive;
 import org.usfirst.frc.team5026.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team5026.robot.subsystems.LimitSwitch;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,6 +24,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static final Drive robotDrive = new Drive();
+	public static final LimitSwitch driveSwitch = new LimitSwitch();
+	
 	public static OI oi;
 	public static Hardware hardware;
 
@@ -35,9 +39,12 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		
 		hardware = new Hardware();
+		
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ExampleCommand());
+        
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
     }
@@ -94,7 +101,6 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-    	public DigitalInput insert = new DigitalInput(0);
         if (autonomousCommand != null) autonomousCommand.cancel();
     }
 
@@ -102,9 +108,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	if(insert.get()){
-    		moverogabotyots
-    	}
+  
         Scheduler.getInstance().run();
         
     }
